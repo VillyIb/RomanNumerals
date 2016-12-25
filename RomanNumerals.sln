@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumerals", "RomanNumerals\RomanNumerals.csproj", "{36A215C9-0D20-44A6-9BD7-1116D5BF5B34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralContract", "RomanNumeralContract\RomanNumeralContract.csproj", "{CC6EFA6B-888C-4097-B9F6-16E57375BABF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralsTest", "RomanNumeralsTest\RomanNumeralsTest.csproj", "{6E7B24DA-731A-43A8-930D-809C0F6DBD38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilites", "Utilites\Utilites.csproj", "{37BA843A-92BC-408C-94A6-052C61F2F726}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36A215C9-0D20-44A6-9BD7-1116D5BF5B34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36A215C9-0D20-44A6-9BD7-1116D5BF5B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36A215C9-0D20-44A6-9BD7-1116D5BF5B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36A215C9-0D20-44A6-9BD7-1116D5BF5B34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC6EFA6B-888C-4097-B9F6-16E57375BABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC6EFA6B-888C-4097-B9F6-16E57375BABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC6EFA6B-888C-4097-B9F6-16E57375BABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC6EFA6B-888C-4097-B9F6-16E57375BABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E7B24DA-731A-43A8-930D-809C0F6DBD38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E7B24DA-731A-43A8-930D-809C0F6DBD38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E7B24DA-731A-43A8-930D-809C0F6DBD38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E7B24DA-731A-43A8-930D-809C0F6DBD38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37BA843A-92BC-408C-94A6-052C61F2F726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37BA843A-92BC-408C-94A6-052C61F2F726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37BA843A-92BC-408C-94A6-052C61F2F726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37BA843A-92BC-408C-94A6-052C61F2F726}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
