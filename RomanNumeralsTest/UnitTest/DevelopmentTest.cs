@@ -8,7 +8,7 @@ namespace RomanNumeralsTest.UnitTest
 {
     public class DevelopmentTest
     {
-        private readonly IRomanNumeralService RomanNumeralService;
+        private readonly INumeralService znumeralService;
 
         public StringBuilder TestLog { get; protected set; }
 
@@ -63,8 +63,8 @@ namespace RomanNumeralsTest.UnitTest
                     {
                         Setup("Alfa");
 
-                        int value;
-                        RomanNumeralService.TryParse(out value, "IV");
+                        int result;
+                        znumeralService.TryParse("IV", out result);
 
                         // TDD very first test with empty implementation is expexted to throw exception.
                         
@@ -169,11 +169,11 @@ PassedTestCount++;
         // Using interface and dependency injection decouples the actual implementation from this project.
         // This test can be uset to test any implementation of interface "IRomanNummeralService".
 
-        public DevelopmentTest(IRomanNumeralService romanNumeralService)
+        public DevelopmentTest(INumeralService _NumeralService)
 {
-    if (romanNumeralService == null) { throw new ArgumentNullException("romanNumeralService"); }
+    if (_NumeralService == null) { throw new ArgumentNullException("_NumeralService"); }
 
-    RomanNumeralService = romanNumeralService;
+    znumeralService = _NumeralService;
 
     TestLog = new StringBuilder();
 }

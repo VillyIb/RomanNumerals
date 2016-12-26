@@ -9,14 +9,15 @@ namespace RomanNumeralsTest
     {
         static void Main(string[] args)
         {
-            IRomanNumeralService testtarget = new RomanNumberService();
+            INumeralService testtarget = new NumberService();
 
             var testrunner = new DevelopmentTest(testtarget);
 
             if (testrunner.Execute())
             {
-                var msg = String.Format("Testing passed {0} tests without errors", testrunner.TestCount);
-                Console.WriteLine(msg);
+                Console.WriteLine(testrunner.TestLog.ToString());
+                //var msg = String.Format("Testing passed {0} tests without errors", testrunner.TestCount);
+                //Console.WriteLine(msg);
             }
             else
             {
@@ -24,7 +25,7 @@ namespace RomanNumeralsTest
                 Console.WriteLine(testrunner.TestLog.ToString());
             }
 
-            Console.WriteLine("press Enter to end program");
+            Console.WriteLine("\r\npress Enter to end program");
             Console.ReadLine();
         }
     }

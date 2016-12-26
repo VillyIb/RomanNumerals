@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumerals", "RomanNumerals\RomanNumerals.csproj", "{36A215C9-0D20-44A6-9BD7-1116D5BF5B34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralContract", "RomanNumeralContract\RomanNumeralContract.csproj", "{CC6EFA6B-888C-4097-B9F6-16E57375BABF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumeralContract", "RomanNumeralContract\NumeralContract.csproj", "{CC6EFA6B-888C-4097-B9F6-16E57375BABF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralsTest", "RomanNumeralsTest\RomanNumeralsTest.csproj", "{6E7B24DA-731A-43A8-930D-809C0F6DBD38}"
 EndProject

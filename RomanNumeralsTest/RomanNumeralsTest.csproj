@@ -46,9 +46,9 @@
     <Compile Include="UnitTest\DevelopmentTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RomanNumeralContract\RomanNumeralContract.csproj">
+    <ProjectReference Include="..\RomanNumeralContract\NumeralContract.csproj">
       <Project>{cc6efa6b-888c-4097-b9f6-16e57375babf}</Project>
-      <Name>RomanNumeralContract</Name>
+      <Name>NumeralContract</Name>
     </ProjectReference>
     <ProjectReference Include="..\RomanNumerals\RomanNumerals.csproj">
       <Project>{36a215c9-0d20-44a6-9bd7-1116d5bf5b34}</Project>

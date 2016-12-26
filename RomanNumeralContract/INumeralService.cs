@@ -5,17 +5,17 @@ using System.Text;
 
 namespace RomanNumeralContract
 {
-    public interface IRomanNumeralService
+    public interface INumeralService
     {
 
         /// <summary>
-        /// Converts the specified string representation of a Roman Number to its integer equivalent 
+        /// Converts the specified string representation of a Number to its integer equivalent 
         /// and returns a value that indicates whether the conversion succeeded.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="roman"></param>
+        /// <param name="s"></param>
+        /// <param name="result"></param>
         /// <returns></returns>
-        bool TryParse(out int value, string roman);
+        bool TryParse(string s, out int result);
 
 
         /// <summary>
@@ -23,6 +23,6 @@ namespace RomanNumeralContract
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        string ToRoman(int value);
+        string ToString(int value);
     }
 }

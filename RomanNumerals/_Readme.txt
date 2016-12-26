@@ -12,3 +12,7 @@ Status: Work in progress
 
 
 
+Why not using static method for parsing roman numberic? E.g.: "pubic static bool TryParse(string s, out int result)".
+
+* Main reason is testability, a proper test reference an interface. A static method cannot implement an interface.
+

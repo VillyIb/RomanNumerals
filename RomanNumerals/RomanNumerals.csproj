@@ -40,15 +40,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RomanNumberService.cs" />
+    <Compile Include="RomanNumeralsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="_Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RomanNumeralContract\RomanNumeralContract.csproj">
+    <ProjectReference Include="..\RomanNumeralContract\NumeralContract.csproj">
       <Project>{cc6efa6b-888c-4097-b9f6-16e57375babf}</Project>
-      <Name>RomanNumeralContract</Name>
+      <Name>NumeralContract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
