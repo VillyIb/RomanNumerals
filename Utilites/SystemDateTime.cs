@@ -4,7 +4,7 @@ namespace Utilites
 {
 
     /// <summary>
-    /// SystemDateTime Enables the 
+    /// SystemDateTime is Mock for DatTime where time and speed can be explicit set.
     /// </summary>
     public static class SystemDateTime
     {

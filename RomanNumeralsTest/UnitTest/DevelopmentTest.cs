@@ -8,27 +8,36 @@ namespace RomanNumeralsTest.UnitTest
 {
     public class DevelopmentTest
     {
-        private readonly INumeralService znumeralService;
+        private readonly INumeralService NumeralService;
+
 
         public StringBuilder TestLog { get; protected set; }
 
+
         private string CurrentTest { get; set; }
+
 
         public int TestCount { get; protected set; }
 
+
         public int PassedTestCount { get; protected set; }
+
+
+        public bool BreakOnException { get; set; }
+
 
         /// <summary>
         /// Prepare Test Setup.
         /// </summary>
-        private void Setup(string testname)
+        private void Setup(string testname, bool breakOnException = false)
         {
+            BreakOnException = breakOnException;
             CurrentTest = testname;
-            TestCount++;
-            TestLog.AppendFormat("\r\n{0:yyyy-MM-dd HH:mm} Starting test {1}", SystemDateTime.Now, CurrentTest);
+            TestLog.AppendFormat("\r\n{0:yyyy-MM-dd HH:mm} Starting test '{1}'", SystemDateTime.Now, CurrentTest);
 
             // E.g. Database preparation
         }
+
 
         /// <summary>
         /// Clenaup after Test.
@@ -36,15 +45,22 @@ namespace RomanNumeralsTest.UnitTest
         private void Teardown()
         {
             // E.g. Database Cleanup
-            TestLog.AppendFormat("\r\n{0:yyyy-MM-dd HH:mm} Finished test {1}\r\n\n", SystemDateTime.Now, CurrentTest);
+            TestLog.AppendFormat("\r\n{0:yyyy-MM-dd HH:mm} Finished test '{1}'\r\n\n", SystemDateTime.Now, CurrentTest);
         }
 
 
-        public void Assert(bool expectedTrue)
+        public void Assert(bool expectedTrue, string reference = "")
         {
+            TestCount++;
             if (!(expectedTrue))
             {
-                throw new ApplicationException(CurrentTest);
+                TestLog.AppendFormat("\r\n{0:yyyy-MM-dd HH:mm}   Failed test '{1}' - {2}", SystemDateTime.Now, CurrentTest, reference);
+
+                if (BreakOnException) { throw new ApplicationException(CurrentTest); }
+            }
+            else
+            {
+                PassedTestCount++;
             }
         }
 
@@ -55,28 +71,55 @@ namespace RomanNumeralsTest.UnitTest
 
             do // Single pass with option to use break.
             {
-
-                // test Alfa
                 if (bool.Parse("false"))  // ! Compiler doesn't complain about fixed value using 'bool.Parse("xxx")'
                 {
                     try
                     {
-                        Setup("Alfa");
+                        Setup("Alfa", BreakOnException = true);
 
                         int result;
-                        znumeralService.TryParse("IV", out result);
+                        NumeralService.TryParse("IV", out result);
 
                         // TDD very first test with empty implementation is expexted to throw exception.
-                        
-                        //public bool TryParse(out int value, string roman)
+
+                        //public bool TryParse(string roman, out int value)
                         //{
                         //    throw new NotImplementedException();
                         //}
 
-                        TestLog.AppendFormat("\r\n*** Failed: expected to throw exception");
+                        Assert(false);
                     }
                     catch (NotImplementedException)
                     {
+                        Assert(true);
+                    }
+
+                    catch (Exception ex)
+                    {
+                        TestLog.AppendFormat("\r\n*** Failed: {0}", ex);
+                    }
+
+                    finally
+                    {
+                        Teardown();
+                    }
+                }
+
+
+                if (bool.Parse("false"))
+                {
+                    try
+                    {
+                        Setup("Test Encode - decode", BreakOnException = true);
+
+                        int t1;
+                        for (var test = 1; test < 4000; test++)
+                        {
+                            var r6 = NumeralService.ToString(test);
+                            var n6 = NumeralService.TryParse(r6, out t1) ? t1 : -1;
+                            Assert(test == n6, test.ToString());
+                        }
+
                         PassedTestCount++;
                     }
 
@@ -91,14 +134,15 @@ namespace RomanNumeralsTest.UnitTest
                     }
                 }
 
-                // test Bravo
                 if (bool.Parse("true"))
                 {
                     try
                     {
-                        Setup("Bravo");
+                        Setup("Acceptance test Encode");
 
-PassedTestCount++;
+                        Assert("MCMXCIX".Equals(NumeralService.ToString(1999), StringComparison.OrdinalIgnoreCase), "1999");
+                        Assert("MMCDXLIV".Equals(NumeralService.ToString(2444), StringComparison.OrdinalIgnoreCase), "2444");
+                        Assert("XC".Equals(NumeralService.ToString(90), StringComparison.OrdinalIgnoreCase), "90");
                     }
 
                     catch (Exception ex)
@@ -112,14 +156,16 @@ PassedTestCount++;
                     }
                 }
 
-                // test Charlie
                 if (bool.Parse("true"))
                 {
                     try
                     {
-                        Setup("Charlie");
+                        Setup("Acceptance Test Decode");
 
-PassedTestCount++;
+                        int t1;
+                        Assert(1999 == (NumeralService.TryParse("MCMXCIX", out t1) ? t1 : -1), "1999");
+                        Assert(2444 == (NumeralService.TryParse("MMCDXLIV", out t1) ? t1 : -1), "2444");
+                        Assert(90 == (NumeralService.TryParse("XC", out t1) ? t1 : -1), "90");
                     }
 
                     catch (Exception ex)
@@ -133,14 +179,18 @@ PassedTestCount++;
                     }
                 }
 
-                // test Delta
                 if (bool.Parse("true"))
                 {
                     try
                     {
-                        Setup("Delta");
+                        Setup("Test lower boundary");
+                        NumeralService.ToString(0);
+                        Assert(false, "0");
+                    }
 
-PassedTestCount++;
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Assert(true);
                     }
 
                     catch (Exception ex)
@@ -151,6 +201,75 @@ PassedTestCount++;
                     finally
                     {
                         Teardown();
+                    }
+                }
+
+                if (bool.Parse("true"))
+                {
+                    try
+                    {
+                        Setup("Test upper boundary");
+                        NumeralService.ToString(4000);
+                        Assert(false, "4000");
+                    }
+
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Assert(true);
+                    }
+
+                    catch (Exception ex)
+                    {
+                        TestLog.AppendFormat("\r\n*** Failed: {0}", ex);
+                    }
+
+                    finally
+                    {
+                        Teardown();
+                    }
+                }
+
+                if (bool.Parse("true"))
+                {
+                    try
+                    {
+                        Setup("Test garbage");
+                        var garbageRoman = "MMMMDLXVII"; // 4567 outside valid range.
+                        int t1;
+                        Assert(!(NumeralService.TryParse(garbageRoman, out t1)), "MMMMDLXVII");
+                    }
+
+                    catch (Exception ex)
+                    {
+                        TestLog.AppendFormat("\r\n*** Failed: {0}", ex);
+                    }
+
+                    finally
+                    {
+                        Teardown();
+                    }
+                }
+
+                if (bool.Parse("false"))
+                {
+                    try
+                    {
+                        SystemDateTime.SetTime(new DateTime(1897, 12, 12));
+
+                        Setup("Test year");
+                        var year = SystemDateTime.Today.Year;
+                        Assert("MDCCCXCVII".Equals(NumeralService.ToString(year)), "1897");
+                    }
+
+                    catch (Exception ex)
+                    {
+                        TestLog.AppendFormat("\r\n*** Failed: {0}", ex);
+                    }
+
+                    finally
+                    {
+                        Teardown();
+                        SystemDateTime.Reset();
                     }
                 }
 
@@ -169,13 +288,13 @@ PassedTestCount++;
         // Using interface and dependency injection decouples the actual implementation from this project.
         // This test can be uset to test any implementation of interface "IRomanNummeralService".
 
-        public DevelopmentTest(INumeralService _NumeralService)
-{
-    if (_NumeralService == null) { throw new ArgumentNullException("_NumeralService"); }
+        public DevelopmentTest(INumeralService numeralService)
+        {
+            if (numeralService == null) { throw new ArgumentNullException(nameof(numeralService)); }
 
-    znumeralService = _NumeralService;
+            NumeralService = numeralService;
 
-    TestLog = new StringBuilder();
-}
+            TestLog = new StringBuilder();
+        }
     }
 }

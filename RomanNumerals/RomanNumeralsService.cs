@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RomanNumeralContract;
+﻿using RomanNumeralContract;
 
 namespace RomanNumerals
 {
-    public class NumberService : INumeralService
+    public class RomanNumeralsService : INumeralService
     {
         #region Implementation of INumeralService
 
@@ -19,9 +15,12 @@ namespace RomanNumerals
         /// <returns></returns>
         public bool TryParse(string roman, out int result)
         {
-            throw new NotImplementedException();
+            return FromRomanNumeral.TryParse(roman, out result);
         }
 
+
+
+     
 
         /// <summary>
         /// Converts the specified integer value to a string representing the value as Roman Number.
@@ -30,7 +29,7 @@ namespace RomanNumerals
         /// <returns></returns>
         public string ToString(int value)
         {
-            throw new NotImplementedException();
+            return ToRomanNumeral.ToString(value);
         }
 
         #endregion

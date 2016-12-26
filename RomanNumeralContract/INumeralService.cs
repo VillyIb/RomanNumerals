@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace RomanNumeralContract
+﻿namespace RomanNumeralContract
 {
+
+    /// <summary>
+    /// General NumeralService Contract.
+    /// </summary>
     public interface INumeralService
     {
 
@@ -19,7 +18,7 @@ namespace RomanNumeralContract
 
 
         /// <summary>
-        /// Converts the specified integer value to a string representing the value as Roman Number.
+        /// Converts the specified integer value to a string representing the value.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

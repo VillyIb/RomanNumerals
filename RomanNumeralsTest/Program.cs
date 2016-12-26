@@ -7,17 +7,16 @@ namespace RomanNumeralsTest
 {
     class Program
     {
+        // ReSharper disable once UnusedParameter.Local
         static void Main(string[] args)
         {
-            INumeralService testtarget = new NumberService();
+            INumeralService testtarget = new RomanNumeralsService();
 
             var testrunner = new DevelopmentTest(testtarget);
 
             if (testrunner.Execute())
             {
                 Console.WriteLine(testrunner.TestLog.ToString());
-                //var msg = String.Format("Testing passed {0} tests without errors", testrunner.TestCount);
-                //Console.WriteLine(msg);
             }
             else
             {
