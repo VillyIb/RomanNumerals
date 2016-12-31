@@ -16,12 +16,12 @@ namespace RomanNumerals
             result = 0;
 
             var current = romanNumber.Trim();
-            foreach (var converter in RomanDecadeConverter.RomanDecadeList)
+            foreach (var converter in RomanDecade.RomanDecadeList)
             {
-                var position = converter.GetPositionOfMatchingRomanDigit(current);
-                var sizeOfRomanDigit = converter.PositionEncodedRomanDigits[position].Length;
+                var singleDigitValue = converter.GetValueOfFirstRomanDigit(current);
+                var sizeOfRomanDigit = converter.GetRomanDigit(singleDigitValue).Length;
                 var remaining = current.Substring(sizeOfRomanDigit);
-                result += position * converter.DecadeBase;
+                result += singleDigitValue;
                 current = remaining;
             }
 

@@ -19,9 +19,11 @@ namespace RomanNumerals
             if (value > 3999) throw new ArgumentOutOfRangeException(nameof(value), "max 3999");
 
             var result = new StringBuilder();
-            foreach (var converter in RomanDecadeConverter.RomanDecadeList)
+          
+            foreach (var converter in RomanDecade.RomanDecadeList)
             {
-                result.Append( converter.GetRoman(value));
+                var singelDigitValue = converter.GetSingleDigitValue(value);
+                result.Append( converter.GetRomanDigit(singelDigitValue));
             }
             
             return result.ToString();

@@ -119,8 +119,6 @@ namespace RomanNumeralsTest.UnitTest
                             var n6 = NumeralService.TryParse(r6, out t1) ? t1 : -1;
                             Assert(test == n6, test.ToString());
                         }
-
-                        PassedTestCount++;
                     }
 
                     catch (Exception ex)
@@ -139,6 +137,8 @@ namespace RomanNumeralsTest.UnitTest
                     try
                     {
                         Setup("Acceptance test Encode");
+
+                        // Third party online converter see:http://www.onlineconversion.com/roman_numerals_advanced.htm
 
                         Assert("MCMXCIX".Equals(NumeralService.ToString(1999), StringComparison.OrdinalIgnoreCase), "1999");
                         Assert("MMCDXLIV".Equals(NumeralService.ToString(2444), StringComparison.OrdinalIgnoreCase), "2444");
