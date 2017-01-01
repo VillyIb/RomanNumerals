@@ -1,7 +1,7 @@
 ﻿using System;
 using RomanNumeralContract;
 using RomanNumerals;
-using RomanNumeralsTest.UnitTest;
+using RomanNumeralsTest.Test;
 
 namespace RomanNumeralsTest
 {

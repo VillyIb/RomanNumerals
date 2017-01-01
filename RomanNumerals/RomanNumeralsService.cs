@@ -15,11 +15,9 @@ namespace RomanNumerals
         /// <returns></returns>
         public bool TryParse(string roman, out int result)
         {
+            //throw new NotImplementedException();
             return FromRomanNumeral.TryParse(roman, out result);
         }
-
-
-
      
 
         /// <summary>
@@ -31,7 +29,8 @@ namespace RomanNumerals
         {
             return ToRomanNumeral.ToString(value);
         }
-
+        
+        
         #endregion
     }
 }

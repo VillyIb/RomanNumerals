@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text;
-
 using RomanNumeralContract;
 using Utilites;
+// ReSharper disable RedundantJumpStatement
 
-namespace RomanNumeralsTest.UnitTest
+namespace RomanNumeralsTest.Test
 {
     public class DevelopmentTest
     {
@@ -40,7 +40,7 @@ namespace RomanNumeralsTest.UnitTest
 
 
         /// <summary>
-        /// Clenaup after Test.
+        /// Clenup after Test.
         /// </summary>
         private void Teardown()
         {
@@ -52,15 +52,33 @@ namespace RomanNumeralsTest.UnitTest
         public void Assert(bool expectedTrue, string reference = "")
         {
             TestCount++;
-            if (!(expectedTrue))
+
+            if (expectedTrue)
+            {
+                PassedTestCount++;
+            }
+            else
             {
                 TestLog.AppendFormat("\r\n{0:yyyy-MM-dd HH:mm}   Failed test '{1}' - {2}", SystemDateTime.Now, CurrentTest, reference);
 
                 if (BreakOnException) { throw new ApplicationException(CurrentTest); }
             }
-            else
+        }
+
+
+        public void AssertFail(bool expectedFalse, string reference = "")
+        {
+            TestCount++;
+
+            if (expectedFalse == false)
             {
                 PassedTestCount++;
+            }
+            else
+            {
+                TestLog.AppendFormat("\r\n{0:yyyy-MM-dd HH:mm}   Failed test '{1}' - {2}", SystemDateTime.Now, CurrentTest, reference);
+
+                if (BreakOnException) { throw new ApplicationException(CurrentTest); }
             }
         }
 
@@ -71,11 +89,11 @@ namespace RomanNumeralsTest.UnitTest
 
             do // Single pass with option to use break.
             {
-                if (bool.Parse("false"))  // ! Compiler doesn't complain about fixed value using 'bool.Parse("xxx")'
+                if (bool.Parse("true"))  // ! Compiler doesn't complain about fixed value using 'bool.Parse("xxx")'
                 {
                     try
                     {
-                        Setup("Alfa", BreakOnException = true);
+                        Setup("First Test", BreakOnException = false);
 
                         int result;
                         NumeralService.TryParse("IV", out result);
@@ -87,16 +105,18 @@ namespace RomanNumeralsTest.UnitTest
                         //    throw new NotImplementedException();
                         //}
 
-                        Assert(false);
+                        Assert(true, "First test");
                     }
                     catch (NotImplementedException)
                     {
-                        Assert(true);
+                        Assert(false, "NotImplementedException");
+                        break;
                     }
 
                     catch (Exception ex)
                     {
                         TestLog.AppendFormat("\r\n*** Failed: {0}", ex);
+                        if (BreakOnException) { break; }
                     }
 
                     finally
@@ -112,6 +132,7 @@ namespace RomanNumeralsTest.UnitTest
                     {
                         Setup("Test Encode - decode", BreakOnException = true);
 
+                        // ReSharper disable once TooWideLocalVariableScope
                         int t1;
                         for (var test = 1; test < 4000; test++)
                         {
@@ -124,6 +145,7 @@ namespace RomanNumeralsTest.UnitTest
                     catch (Exception ex)
                     {
                         TestLog.AppendFormat("\r\n*** Failed: {0}", ex);
+                        if (BreakOnException) { break; }
                     }
 
                     finally
@@ -148,6 +170,7 @@ namespace RomanNumeralsTest.UnitTest
                     catch (Exception ex)
                     {
                         TestLog.AppendFormat("\r\n*** Failed: {0}", ex);
+                        if (BreakOnException) { break; }
                     }
 
                     finally
@@ -171,6 +194,7 @@ namespace RomanNumeralsTest.UnitTest
                     catch (Exception ex)
                     {
                         TestLog.AppendFormat("\r\n*** Failed: {0}", ex);
+                        if (BreakOnException) { break; }
                     }
 
                     finally
@@ -184,7 +208,7 @@ namespace RomanNumeralsTest.UnitTest
                     try
                     {
                         Setup("Test lower boundary");
-                        NumeralService.ToString(0);
+                        NumeralService.ToString(0); // expected ArgumentOutOfRangeException
                         Assert(false, "0");
                     }
 
@@ -196,6 +220,7 @@ namespace RomanNumeralsTest.UnitTest
                     catch (Exception ex)
                     {
                         TestLog.AppendFormat("\r\n*** Failed: {0}", ex);
+                        if (BreakOnException) { break; }
                     }
 
                     finally
@@ -209,7 +234,7 @@ namespace RomanNumeralsTest.UnitTest
                     try
                     {
                         Setup("Test upper boundary");
-                        NumeralService.ToString(4000);
+                        NumeralService.ToString(4000); // expected ArgumentOutOfRangeException
                         Assert(false, "4000");
                     }
 
@@ -221,6 +246,7 @@ namespace RomanNumeralsTest.UnitTest
                     catch (Exception ex)
                     {
                         TestLog.AppendFormat("\r\n*** Failed: {0}", ex);
+                        if (BreakOnException) { break; }
                     }
 
                     finally
@@ -236,12 +262,15 @@ namespace RomanNumeralsTest.UnitTest
                         Setup("Test garbage");
                         var garbageRoman = "MMMMDLXVII"; // 4567 outside valid range.
                         int t1;
-                        Assert(!(NumeralService.TryParse(garbageRoman, out t1)), "MMMMDLXVII");
+                        AssertFail(NumeralService.TryParse(garbageRoman, out t1), "MMMMDLXVII");
+                        AssertFail(NumeralService.TryParse("XCMCMIX", out t1), "XCMCMIX"); // 1999 permutated
+                        AssertFail(NumeralService.TryParse("XLMMCDIV", out t1), "XLMMCDIV"); // 2444 permutated
                     }
 
                     catch (Exception ex)
                     {
                         TestLog.AppendFormat("\r\n*** Failed: {0}", ex);
+                        if (BreakOnException) { break; }
                     }
 
                     finally
@@ -250,7 +279,7 @@ namespace RomanNumeralsTest.UnitTest
                     }
                 }
 
-                if (bool.Parse("false"))
+                if (bool.Parse("true"))
                 {
                     try
                     {
@@ -264,6 +293,7 @@ namespace RomanNumeralsTest.UnitTest
                     catch (Exception ex)
                     {
                         TestLog.AppendFormat("\r\n*** Failed: {0}", ex);
+                        if (BreakOnException) { break; }
                     }
 
                     finally

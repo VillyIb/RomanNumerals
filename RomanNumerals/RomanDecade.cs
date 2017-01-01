@@ -20,6 +20,7 @@ namespace RomanNumerals
 
         public int GetSingleDigitValue(int value)
         {
+            // ReSharper disable once ArrangeRedundantParentheses
             return (value / DecadeBase % 10) * DecadeBase;
         }
 
