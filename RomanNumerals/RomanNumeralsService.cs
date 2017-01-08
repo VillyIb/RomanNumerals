@@ -22,12 +22,22 @@ namespace RomanNumerals
                 current = remaining;
             }
 
-            var t1 = ToRomanNumber(result);
-            if (current.Length > 0) throw new ArgumentOutOfRangeException(nameof(romanNumber), String.Format("Parse '{0}', stopped parsing after '{1}'", romanNumber, t1));
+            if (result == 0)
+                throw new ArgumentOutOfRangeException(
+                   nameof(romanNumber)
+                   , String.Format("Parse '{0}', result 0 is not valid", romanNumber)
+                );
 
-            if (result == 0) throw new ArgumentOutOfRangeException(nameof(romanNumber), String.Format("Parse '{0}', result 0 is not valid", romanNumber));
-            
-            if (!(romanNumber.Trim().Equals(t1, StringComparison.OrdinalIgnoreCase))) throw new ArgumentOutOfRangeException(nameof(romanNumber), String.Format("Parse '{0}', not matching '{1}", romanNumber, t1));
+            var t1 = ToRomanNumber(result);
+            if (current.Length > 0) throw new ArgumentOutOfRangeException(
+                nameof(romanNumber)
+                , String.Format("Parse '{0}', stopped parsing after '{1}'", romanNumber, t1)
+            );
+
+            if (!(romanNumber.Trim().Equals(t1, StringComparison.OrdinalIgnoreCase))) throw new ArgumentOutOfRangeException(
+                nameof(romanNumber)
+                , String.Format("Parse '{0}', not matching '{1}", romanNumber, t1)
+            );
 
             return result;
         }

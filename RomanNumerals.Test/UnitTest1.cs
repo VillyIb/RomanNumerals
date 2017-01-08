@@ -99,6 +99,29 @@ namespace RomanNumerals.Test
         }
 
 
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
+        public void Test_Parse_Fail_Garbage_AAAA()
+        {
+            Assert.AreEqual<int>(10, RomaNumeralService.Parse("AAAAA"));
+        }
+
+
+        [TestMethod]
+        public void Test_Parse_blanksArount_MCMXCIX()
+        {
+            Assert.AreEqual<int>(1999, RomaNumeralService.Parse(" MCMXCIX "));
+        }
+
+
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
+        public void Test_Parse_Fail_MCM_XCIX()
+        {
+            Assert.AreEqual<int>(1999, RomaNumeralService.Parse("MCM_XCIX"));
+        }
+
+
         [TestMethod]
         public void Test_Parse_HasErrorMessage_2444Perm()
         {
