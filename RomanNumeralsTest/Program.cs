@@ -10,7 +10,7 @@ namespace RomanNumeralsTest
         // ReSharper disable once UnusedParameter.Local
         static void Main(string[] args)
         {
-            INumeralService testtarget = new RomanNumeralsService();
+            IRomanNumberService testtarget = new RomanNumeralsService();
 
             var testrunner = new DevelopmentTest(testtarget);
 

@@ -8,7 +8,7 @@ namespace RomanNumeralsTest.Test
 {
     public class DevelopmentTest
     {
-        private readonly INumeralService NumeralService;
+        private readonly IRomanNumberService NumeralService;
 
 
         public StringBuilder TestLog { get; protected set; }
@@ -318,7 +318,7 @@ namespace RomanNumeralsTest.Test
         // Using interface and dependency injection decouples the actual implementation from this project.
         // This test can be uset to test any implementation of interface "IRomanNummeralService".
 
-        public DevelopmentTest(INumeralService numeralService)
+        public DevelopmentTest(IRomanNumberService numeralService)
         {
             if (numeralService == null) { throw new ArgumentNullException(nameof(numeralService)); }
 
